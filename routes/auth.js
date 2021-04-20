@@ -112,8 +112,13 @@ router.post('/forgot-password', (req, res) => {
                     + '\n\n\t\t\t\t\t\t\t\t\t\tRegards,\n\t\t\t\t\t\t\t\tThe News App'
                 };
                 smtpTransport.sendMail(mailOptions, function(err) {
-                    req.flash("success", "An e-mail has been sent to " + user.username + " with further instructions.");
-                    res.redirect('back');
+                    if(err){
+                        console.log(err);
+                        return  res.redirect('/login');
+                    } else {
+                        req.flash("success", "An e-mail has been sent to " + user.username + " with further instructions.");
+                        res.redirect('back');
+                    }
                 })
             })
         }

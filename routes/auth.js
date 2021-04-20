@@ -1,6 +1,7 @@
 const express    = require("express"),
       router     = express.Router({mergeParams : true}),
       crypto     = require('crypto'),
+      nodeMailer = require("nodemailer"),
 	  dotenv     = require('dotenv'),
 	  User       = require("../models/user"),
 	  middleware = require("../middleware"),

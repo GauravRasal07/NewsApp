@@ -1,0 +1,61 @@
+<%- include("partials/header") %>
+
+<div class="jumbotron">
+    <div class="container">
+        <h3>Saved Articles</h3>
+    </div>
+</div>
+
+<div class="container main">
+    <div class="row">
+        <% if(user.saved.length < 1){ %>
+            <h3 style="text-align: center;"><i class="fa fa-frown-o" aria-hidden="true"></i> Oops, There are No Saved articles to Display in this field!!!</h3>
+        <% } %>
+        <% user.saved.forEach((article) => { %>
+        <div class="column">
+            <div class="card">
+                <div>
+                    <span style="float: right;"><a href="/remove-article/<%= currentUser.id %>/<%= article.id %>"><i class="fas fa-bookmark"></i></a></span>
+                    <h4 style="padding-top: 20px;"><%= article.title %></h4>
+                </div>
+                <div class="left"><%= article.description %></div>
+                <br>
+                <div class="left"><%= article.content %></div>
+                <hr>
+                <div>
+                    <img alt="News Image" class="newsImage" src="<%= article.image %>">
+                </div>
+                <hr>
+                <div class="left">
+                    <p>
+                        <div>
+                            Dated : <%= article.publishedAt.toLocaleDateString() %>
+                        </div>
+                        at : <%= article.publishedAt.toLocaleTimeString() %>
+                    </p>
+                    <h6>Source : <%= article.source %></h6>
+                    <h6>Author : <%= article.author %></h6> 
+                </div>
+                <div style="text-align: right;">
+                    <a href="<%= article.source_news %>">Original News</a>
+                </div>
+            </div>
+        </div>
+        <% }) %>
+    </div>
+</div>
+
+<div class="navbar">
+    <div class="container">
+        <a href="/"><i class="fas fa-home"></i> Home</a>
+        <% if(currentUser){ %>
+            <a href="/logout" class="right"><%= currentUser.username %> <i class="fas fa-user-circle"></i></a>
+        <% } else {%>
+            <a href="/login">Login <i class="fas fa-sign-in-alt"></i></a>
+        <% } %>
+        
+        
+    </div>
+</div>
+
+<%- include("partials/footer") %>

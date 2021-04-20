@@ -1,0 +1,63 @@
+<%- include("partials/header") %>
+
+<div class="jumbotron">
+    <div class="container">
+        <a href="" class="typewrite" data-period="2000" data-type='[ "The News App", "Get the News on Your Table." ]'>
+            <h1><span class="wrap"></span></h1>
+        </a>
+    </div>
+</div>
+
+<div class="container main">
+    <div class="row">
+        <% articles.forEach((article) => { %>
+        <div class="column">
+            <div class="card">
+                <div>
+                    <% if(currentUser){ %>
+                        <span style="float: right;"><a href="/save-article/<%= currentUser.id %>/<%= article.id %>"><i class="far fa-bookmark"></i></a></span>
+                    <% } else {%>
+                        <span style="float: right;"><a href="/save-article"><i class="far fa-bookmark"></i></a></span>
+                    <% } %>
+                    <h4 style="padding-top: 20px;"><%= article.title %></h4>
+                </div>
+                <div class="left"><%= article.description %></div>
+                <br>
+                <div class="left"><%= article.content %></div>
+                <hr>
+                <div>
+                    <img alt="News Image" class="newsImage" src="<%= article.image %>">
+                </div>
+                <hr>
+                <div class="left">
+                    <p>
+                        <div>
+                            Dated : <%= article.publishedAt.toLocaleDateString() %>
+                        </div>
+                        at : <%= article.publishedAt.toLocaleTimeString() %>
+                    </p>
+                    <h6>Source : <%= article.source %></h6>
+                    <h6>Author : <%= article.author %></h6> 
+                </div>
+                <div style="text-align: right;">
+                    <a href="<%= article.source_news %>">Original News</a>
+                </div>
+            </div>
+        </div>
+        <% }) %>
+    </div>
+</div>
+
+<div class="navbar">
+    <div class="container">
+        <% if(currentUser){ %>
+            <a href="/saved/<%= currentUser.id %>"><i class="fas fa-bookmark"></i> Saved Articles</a>
+            <a href="/logout" class="right"><%= currentUser.username %> <i class="fas fa-user-circle"></i></a>
+        <% } else {%>
+            <a href="/save-article"><i class="fas fa-bookmark"></i> Saved Articles</a>
+            <a href="/login" class="right">Login <i class="fas fa-sign-in-alt"></i></a>
+        <% } %>
+    </div>
+</div>
+
+<%- include("partials/footer") %>

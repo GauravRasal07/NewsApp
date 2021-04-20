@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A News App</title>   
+    <link rel="shortcut icon" href="./images/favicon.svg" type="image/x-icon"> 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/./stylesheets/app.css">
+</head>
+<body>
+    <% if(error && error.length > 0){ %>
+        <div class="alert alert-danger alert-dismissible" style="margin-bottom: 0px;">
+            <a href="/home" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong><%= error %></strong>
+        </div>
+    <% } %>
+
+    <% if(success && success.length > 0){ %>
+        <div class="alert alert-success alert-dismissible" style="margin-bottom: 0px;">
+            <a href="/home" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong><%= success %></strong>
+        </div>
+    <% } %>

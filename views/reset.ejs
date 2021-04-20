@@ -1,0 +1,37 @@
+<%- include("partials/header") %>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-xs-12 col-md-4">
+                <form action="/reset/<%= token %>" method="POST" class="form verify-form">
+                    <h4>Reset Password</h4>
+                    <div class="form-group">
+                        <label for="username">Email</label>
+                        <input type="text" name="username" value="<%= email %>" class="form-control inp" id="username" disabled required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Password </label>
+                        <input type="password" name="pass" class="form-control inp" id="pwd" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cnfpwd">Confirm Password</label>
+                        <input type="password" name="confirm" class="form-control inp" id="cnfpwd" required>
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Reset Password</button>
+                    <div><br>
+                </form>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+</section>
+
+<div class="navbar">
+    <div class="container">
+        <a href="/"><i class="fas fa-home"></i> Home</a>
+    </div>
+</div>
+
+<%- include("partials/footer") %>

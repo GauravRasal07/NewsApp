@@ -1,0 +1,44 @@
+<%- include("partials/header") %>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-xs-12 col-md-4">
+                <form action="/register" method="POST" id="reg" class="form verify-form">
+                    <h3>Create an account</h3>
+                    <p>Allready have account? <span><a href="/login"> Log In</a></span></p><br>
+                    <div class="form-group">
+                        <label for="email">E-Mail</label>
+                        <input type="email" name="email" class="form-control inp" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Password</label>
+                        <input type="password" name="password" class="form-control inp" id="pwd" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cnfpwd">Confirm Password</label>
+                        <input type="password" name="confirm" class="form-control inp" id="cnfpwd" required>
+                        <small style="float: right;">All fields are compulsory</small>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-secondary">Create Account</button>
+                    </div>
+                    <div><br><a href="/login">back</a></div>
+                </form>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+</section>
+
+<div class="navbar">
+    <div class="container">
+        <a href="/"><i class="fas fa-home"></i> Home</a>
+        <% if(currentUser){ %>
+            <a href="" class="right">Account <i class="fas fa-user-circle"></i></a>
+        <% } %>
+    </div>
+</div>
+
+<%- include("partials/footer") %>

@@ -1,0 +1,29 @@
+<%- include("partials/header") %>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-xs-12 col-md-4">
+                <form action="/forgot-password" method="POST" class="form verify-form">
+                    <h4>Enter Registered Email</h4>
+                    <div class="form-group">
+                        <label for="username">Email</label>
+                        <input type="email" name="email" class="form-control inp" id="username" required>
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Proceed</button>
+                    <br>
+                </form>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+</section>
+
+<div class="navbar">
+    <div class="container">
+        <a href="/"><i class="fas fa-home"></i> Home</a>
+    </div>
+</div>
+
+<%- include("partials/footer") %>

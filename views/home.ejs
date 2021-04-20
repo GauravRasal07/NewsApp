@@ -52,7 +52,7 @@
     <div class="container">
         <% if(currentUser){ %>
             <a href="/saved/<%= currentUser.id %>"><i class="fas fa-bookmark"></i> Saved Articles</a>
-            <a href="/logout" class="right"><%= currentUser.username %> <i class="fas fa-user-circle"></i></a>
+            <a href="/logout" class="right"><%= currentUser.username %> <i class="fas fa-sign-out-alt"></i></a>
         <% } else {%>
             <a href="/save-article"><i class="fas fa-bookmark"></i> Saved Articles</a>
             <a href="/login" class="right">Login <i class="fas fa-sign-in-alt"></i></a>

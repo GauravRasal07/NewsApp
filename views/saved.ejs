@@ -49,7 +49,7 @@
     <div class="container">
         <a href="/"><i class="fas fa-home"></i> Home</a>
         <% if(currentUser){ %>
-            <a href="/logout" class="right"><%= currentUser.username %> <i class="fas fa-user-circle"></i></a>
+            <a href="/logout" class="right"><%= currentUser.username %> <i class="fas fa-sign-out-alt"></i></a>
         <% } else {%>
             <a href="/login">Login <i class="fas fa-sign-in-alt"></i></a>
         <% } %>

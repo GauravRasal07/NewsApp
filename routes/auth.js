@@ -113,7 +113,11 @@ router.post('/forgot-password', (req, res) => {
                 };
                 smtpTransport.sendMail(mailOptions, function(err) {
                     if(err){
+<<<<<<< HEAD
                         req.flash("error", "Internal Server Error");
+=======
+                        creq.flash("error", "Internal Server Error");
+>>>>>>> 1082ba95f412f675364d2fda65e13418fbec4462
                         return  res.redirect('/login');
                     } else {
                         req.flash("success", "An e-mail has been sent to " + user.username + " with further instructions.");

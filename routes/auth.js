@@ -21,6 +21,7 @@ router.post("/register", (req, res) => {
 		User.register(newUser, req.body.password, function(err, user){
 			if(err){
 				req.flash("error", err.message);
+                console.log(err);
 				res.redirect("/register");
 			} else {
                 req.flash("success", "Successfully Registered, Login with your Credentials!!!")
@@ -40,7 +41,6 @@ router.get('/auth/google/callback',
   passport.authenticate('google', { 
     successRedirect : "/home",
 	failureRedirect : "/login",
-	failureFlash: true
 }),(req, res) => {
 });
 
@@ -52,6 +52,7 @@ router.get("/login", (req, res) => {
 router.post("/login", passport.authenticate("local", {
 	successRedirect : "/home",
 	failureRedirect : "/login",
+    successFlash : true,
 	failureFlash: true
 }), (req, res) => {
 });
@@ -113,11 +114,7 @@ router.post('/forgot-password', (req, res) => {
                 };
                 smtpTransport.sendMail(mailOptions, function(err) {
                     if(err){
-<<<<<<< HEAD
                         req.flash("error", "Internal Server Error");
-=======
-                        creq.flash("error", "Internal Server Error");
->>>>>>> 1082ba95f412f675364d2fda65e13418fbec4462
                         return  res.redirect('/login');
                     } else {
                         req.flash("success", "An e-mail has been sent to " + user.username + " with further instructions.");

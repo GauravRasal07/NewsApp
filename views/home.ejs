@@ -1,46 +1,110 @@
 <%- include("partials/header") %>
 
-<div class="jumbotron">
+<div class="jumbotron op">
     <div class="container">
         <a href="" class="typewrite" data-period="2000" data-type='[ "The News App", "Get the News on Your Table." ]'>
             <h1><span class="wrap"></span></h1>
         </a>
     </div>
+    <div class="select">
+        <form action="/home" method="POST" class="form form-inline">
+            <select name="country" class="custom-select">
+                <option value="in" selected>COUNTRY</option>
+                <option value="in">INDIA</option>
+                <option value="us">US</option>
+                <option value="gb">UK</option>
+                <option value="fr">FRANCE</option>
+                <option value="de">GERMANY</option>
+                <option value="au">AUSTRALIA</option>
+                <option value="ca">CANADA</option>
+                <option value="za">SOUTH AFRICA</option>
+                <option value="jp">JAPAN</option>
+                <option value="cn">CHINA</option>
+                <option value="ar">ARGENTINA</option>
+                <option value="at">AUSTRIA</option>
+                <option value="be">BELGIUM</option>
+                <option value="br">BRAZIL</option>
+                <option value="co">COLOMBIA</option>
+                <option value="eg">EGYPT</option>
+                <option value="ru">RUSSIA</option>
+                <option value="hk">HONG KONG</option>
+                <option value="id">INDONESIA</option>
+                <option value="il">ISRAEL</option>
+            </select>
+            <select name="category" class="custom-select">
+                <option value="general" selected>Category</option>
+                <option value="general">General</option>
+                <option value="business">Business</option>
+                <option value="entertainment">Entertainment</option>
+                <option value="technology">Tech</option>
+                <option value="health">Health</option>
+                <option value="science">Science</option>
+                <option value="sports">Sports</option>
+            </select>
+            <button class="btn btn-info" type="submit">Search</button>
+        </form>
+        <form class="form form-inline" action="/home" method="post">
+            <input type="text" name="q" class="form-control" placeholder="Search related to particular Topic..." required>
+            <button class="btn btn-info" type="submit">Search</button>
+        </form>
+    </div>
 </div>
 
-<div class="container main">
+<div class="main">
     <div class="row">
+        <% if(articles.length < 1){ %>
+            <h3 style="text-align: center;"><i class="fa fa-frown-o" aria-hidden="true"></i> Oops, There are articles to Display!!!</h3>
+        <% } %>
         <% articles.forEach((article) => { %>
         <div class="column">
             <div class="card">
                 <div>
                     <% if(currentUser){ %>
-                        <span style="float: right;"><a href="/save-article/<%= currentUser.id %>/<%= article.id %>"><i class="far fa-bookmark"></i></a></span>
+                        <form action="/save-article/<%= currentUser.id %>" method="POST">
+                            <input name="article[title]" style="display: none;" value="<%= article.title %>">
+                            <input name="article[source]" style="display: none;" value="<%= article.source.name %>">
+                            <input name="article[author]" style="display: none;" value="<%= article.author %>">
+                            <input name="article[content]" style="display: none;" value="<%= article.content %>">
+                            <input name="article[description]" style="display: none;" value="<%= article.description %>">
+                            <input name="article[url]" style="display: none;" value="<%= article.url %>">
+                            <input name="article[urlToImage]" style="display: none;" value="<%= article.urlToImage %>">
+                            <input name="article[publishedAt]" style="display: none;" value="<%= article.publishedAt %>">
+                            <span style="float: right;"><button class="save-btn" type="submit"><a><i class="far fa-bookmark"></i></a></button></span>
+                        </form>
                     <% } else {%>
-                        <span style="float: right;"><a href="/save-article"><i class="far fa-bookmark"></i></a></span>
+                        <span style="float: right;"><button class="save-btn"><a href="/save-article"><i class="far fa-bookmark"></i></a></button></span>
                     <% } %>
+                    <br><hr>
+                    <div>
+                        <% if(article.urlToImage){ %>
+                            <img alt="News Image" class="newsImage" src="<%= article.urlToImage %>">
+                        <% } else { %>
+                            <img alt="News Image" class="newsImage" src="/images/no-bg.jpg">
+                        <% } %>
+                    </div>
+                    <hr>
                     <h4 style="padding-top: 20px;"><%= article.title %></h4>
+                    <hr>
                 </div>
                 <div class="left"><%= article.description %></div>
                 <br>
                 <div class="left"><%= article.content %></div>
-                <hr>
-                <div>
-                    <img alt="News Image" class="newsImage" src="<%= article.image %>">
+                <br>
+                <div style="text-align: center;">
+                    <a class="read" target="_blank" href="<%= article.url %>">Read More...</a>
                 </div>
                 <hr>
                 <div class="left">
                     <p>
                         <div>
-                            Dated : <%= article.publishedAt.toLocaleDateString() %>
+                            Dated : <%= moment(article.publishedAt).format('Do MMMM, YYYY') %>
                         </div>
-                        at : <%= article.publishedAt.toLocaleTimeString() %>
+                        at : <%= moment(article.publishedAt).format('HH:mm ') %>
                     </p>
-                    <h6>Source : <%= article.source %></h6>
-                    <h6>Author : <%= article.author %></h6> 
-                </div>
-                <div style="text-align: right;">
-                    <a href="<%= article.source_news %>">Original News</a>
+                    <h6>Source : <%= article.source.name %></h6>
+                    <% if(article.author){ %>
+                        <h6>Author : <%= article.author %></h6> 
+                    <% } %>
                 </div>
             </div>
         </div>

@@ -17,33 +17,36 @@ News.remove({}, (err, deleted) => {
     }
 })
 
-var options = {
-    method: 'GET',
-    url: 'https://api.jsonbin.io/b/607ee47cf099765deef85e5d',
-};
+// var options = {
+//     method: 'GET',
+//     url: 'https://api.jsonbin.io/b/607ee47cf099765deef85e5d',
+// };
 
-axios.request(options).then(function (response) {
-    let articles = response.data.articles;
-    articles.sort(function(a, b){
-        return new Date(a.publishedAt) - new Date(b.publishedAt);
-    });
-    articles.forEach(article => {
-        let news = {
-            title : article.title,
-            description : article.description,
-            content : article.content,
-            image : article.urlToImage,
-            source : article.source.name,
-            author : article.author,
-            publishedAt : article.publishedAt,
-            source_news : article.url
-        }
-    News.create(news, (err, createdNews) => {
-        if(err){
-            console.log(err);
-        }
-    })
-    });
-}).catch(function (error) {
-    console.error(error);
-});
+// axios.request(options).then(function (response) {
+//     let articles = response.data.articles;
+//     articles.sort(function(a, b){
+//         return new Date(a.publishedAt) - new Date(b.publishedAt);
+//     });
+//     articles.forEach(article => {
+//         let news = {
+//             title : article.title,
+//             description : article.description,
+//             content : article.content,
+//             image : article.urlToImage,
+//             source : article.source.name,
+//             author : article.author,
+//             publishedAt : article.publishedAt,
+//             source_news : article.url
+//         }
+//     News.create(news, (err, createdNews) => {
+//         if(err){
+//             console.log(err);
+//         }
+//     })
+//     });
+// }).catch(function (error) {
+//     console.error(error);
+// });
+
+
+// Api Key : a1b7687c45614adc8ee23afa27f3e209

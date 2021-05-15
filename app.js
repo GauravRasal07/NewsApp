@@ -7,10 +7,9 @@ const bodyParser 		    = require("body-parser"),
 	  flash				    = require("connect-flash"),
 	  dotenv 				= require('dotenv'),
       crypto                = require('crypto'),
-      nodeMailer            = require("nodemailer"),
       axios                 = require("axios").default,
 	  User                  = require("./models/user"),
-	  middleware            = require("./middleware"),
+	  moment     		 	= require("moment"),
 	  app       			= express();
 
 dotenv.config();
@@ -53,10 +52,12 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use(function(req, res, next){
+	res.locals.moment	   = moment;
 	res.locals.currentUser = req.user;
     res.locals.articles    = req.articles;
 	res.locals.error	   = req.flash("error");
 	res.locals.success	   = req.flash("success");
+	res.locals.warning	   = req.flash("warning");
 	next();
 });
 

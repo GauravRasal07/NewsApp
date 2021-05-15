@@ -17,8 +17,8 @@ var newsSchema = new mongoose.Schema({
     author : String,
     source : String,
     description : String,
-    source_news : String,
-    image : String,
+    url : String,
+    urlToImage : String,
     publishedAt : Date,
     content : String
 });

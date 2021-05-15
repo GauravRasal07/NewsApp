@@ -51,27 +51,6 @@ app.use(passport.session());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-let articles;
-function getNewsHeadLines(country, category){
-    var options = {
-        method: 'GET',
-        url: 'https://newsapi.org/v2/top-headlines',
-        params: {
-            country : country,
-            category : category,
-            apiKey : process.env.apiKey
-            },
-        };
-        
-        axios.request(options).then(function (response) {
-            articles = response.data.articles;
-        }).catch(function (error) {
-            console.error(error);
-        });
-}
-
-getNewsHeadLines('in', '')
-
 app.use(function(req, res, next){
 	res.locals.moment	   = moment;
 	res.locals.currentUser = req.user;
